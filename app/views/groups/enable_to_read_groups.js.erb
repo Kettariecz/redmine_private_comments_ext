@@ -1,0 +1,4 @@
+$('#tab-content-groups_allowed_author').html('<%= escape_javascript(render :partial => 'groups/groups_allowed_author') %>');
+<% @authors.each do |author| %>
+  $('#group-<%= author.id %>').effect("highlight");
+<% end %>

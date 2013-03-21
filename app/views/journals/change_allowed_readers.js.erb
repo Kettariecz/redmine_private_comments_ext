@@ -1,0 +1,1 @@
+$('#<%= "bottom-note-#{@journal.id}"%>').html('<%= escape_javascript(render :partial => 'issues/private_notes_bottom', :locals => {:journal => @journal}) %>');

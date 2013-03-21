@@ -1,0 +1,21 @@
+<div id="<%="bottom-note-#{journal.id}"%>" >
+<p style="text-align: right;">
+	<em><%= l :private_comments_for_groups%></em>
+</p>
+<% if User.current.allowed_to?(:manage_group_access_to_notes, @project)%>
+	<div id="edit-readers-groups">
+		<%= form_for(journal, :url => {:controller => 'journals', :action => 'change_allowed_readers', :id => journal.id }, :remote => true) do |f| %>
+			<p><% journal.groups.each do |allow_group| %>
+				<%= label_tag 'group_ids[]', allow_group.name %>
+				<%= check_box_tag 'group_ids[]', allow_group.id, true %>
+			<% end%></p>		
+			-------------
+			<p><% (Group.where("1=1") - journal.groups).each do |group| %>
+				<%= label_tag 'group_ids[]', group.name %>
+				<%= check_box_tag 'group_ids[]', group.id, false %>
+			<% end%></p>		
+			<p><%= submit_tag l(:button_save) %></p>		
+		<% end%>
+	</div>
+<% end%>
+</div>

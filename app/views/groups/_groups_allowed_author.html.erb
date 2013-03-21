@@ -1,0 +1,39 @@
+<div class="splitcontentleft">
+<% if @group.allowed_groups_authors.any? %>
+<table class="list groups">
+  <thead><tr>
+  <th><%=l(:label_group)%></th>
+  <th><%=l(:label_user_plural)%></th>
+  <th style="width:15%"></th>
+  </tr></thead>
+  <tbody>
+  <% @group.allowed_groups_authors.each do |comment_author_group| %>
+  <% next if comment_author_group.new_record? %>
+  <tr id="group-<%= comment_author_group.id %>" class="<%= cycle 'odd', 'even' %> class">
+	<td><%= link_to h(comment_author_group), edit_group_path(comment_author_group) %></td>
+	<td align="center"><%= comment_author_group.users.size %></td>
+	<td class="buttons">
+    <%= delete_link({:controller => 'groups', :action => 'disable_to_read_groups', :id => @group, :author_group_id => comment_author_group},
+	                      :remote => true,
+	                      :method => :post) %> 
+	</td>
+  </tr>
+<% end; reset_cycle %>
+  </tbody>
+</table>
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+</div>
+
+<div class="splitcontentright">
+<% author_groups = @group.not_in_available_authors.all(:limit => 100) %>
+<% if author_groups.any? %>
+	<%= form_for(:group, :remote => true, :url => { :action => 'enable_to_read_groups', :id => @group }) do %>
+		<%= label_tag "available_author_groups", l(:description_choose_author_groups), :class => "hidden-for-sighted" %>
+      	<%= principals_check_box_tags 'author_group_ids[]', author_groups %>
+		<p><%= submit_tag l(:button_add) %></p>
+	<% end %>
+<% end %>
+
+</div>

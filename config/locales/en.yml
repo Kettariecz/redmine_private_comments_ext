@@ -1,0 +1,8 @@
+# English strings go here for Rails i18n
+en:
+  field_private_notes: "Private notes"
+  label_groups_reader: "Allowed comments readers"
+  label_groups_allowed_author: "Allowed comments authors"
+  description_choose_author_groups: "Available groups:"
+  private_comments_for_groups: "It's a private message."
+  manage_group_access_to_notes: "Manage comments access."
