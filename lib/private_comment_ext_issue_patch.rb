@@ -14,9 +14,10 @@ include Redmine::SafeAttributes
         :class_name => 'Journal',
         :as => :journalized,
         :conditions => Proc.new { 
-          ["(#{Journal.table_name}.private_notes = ? /*ccc*/ OR "+
+          [ " (" +
+            (User.current.allowed_to?(:view_private_notes, self.project) ? " " : "#{Journal.table_name}.private_notes = ? AND ") +
            "(#{Journal.table_name}.id in (select journal_id from groups_journals where "+
-           "group_id in (#{User.current.groups.pluck(:id)}))))", false]
+           "group_id in (#{User.current.groups.pluck(:id).join(',')}))) OR (#{Journal.table_name}.notes is null))", false]
         },
         :readonly => true      
 

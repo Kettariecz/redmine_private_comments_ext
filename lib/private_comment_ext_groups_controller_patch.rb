@@ -26,6 +26,18 @@ module PrivateCommentExtGroupsControllerPatch
       @group.allowed_groups_authors << @authors
     end
 
+    #Исключает группу из списка, кому доступны комментарии текущей группы    
+    def disable_reader_group
+      @reader = Group.find(params[:reader_group_id])
+      @group.allowed_groups_readers.delete(@reader)
+    end
+
+    #Включает группу в список, кому доступны комментарии текущей группы    
+    def enable_reader_group
+      @readers = Group.find(params[:reader_group_ids]||params[:reader_group_id])
+      @group.allowed_groups_readers << @readers
+    end
+
 
   end
 

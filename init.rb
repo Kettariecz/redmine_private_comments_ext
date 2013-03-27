@@ -26,7 +26,6 @@ Redmine::Plugin.register :private_comments_ext do
 
   #Global permissions
   project_module :issue_tracking do
-    # permission :set_notes_private, {}, :require => :member
     permission :manage_group_access_to_notes, {}, :require => :member
   end
 

@@ -4,5 +4,5 @@ ru:
   label_groups_reader: "Кому доступны комментарии"
   label_groups_allowed_author: "Чьи комментарии доступны"
   description_choose_author_groups: "Не доступны комментарии групп:"
-  private_comments_for_groups: "Приватный комментарий доступен для групп:"
+  private_comments_for_groups: "Комментарий будет доступен для групп:"
   manage_group_access_to_notes: "Управление доступом групп к комментариям."
