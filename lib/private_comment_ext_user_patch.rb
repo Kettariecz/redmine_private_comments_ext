@@ -42,14 +42,12 @@ module PrivateCommentExtUserPatch
     end
 
     #возвращает группы, которым по-умолчанию будут доступны комментарии пользователя
+    #Т.е. группы, в которые входит пользователь, и группы, которые могут читать комментарии этих групп 
     def groups_allowed_to_read
       return [] unless self.groups.any?
       allowed_readers = []
-      # self.groups.each{|group| allowed_readers += group.allowed_groups_readers.pluck(:id)} 
-      self.groups.each{|group| allowed_readers += group.allowed_groups_readers}
-      # self.groups.each do |group|
-        # allowed_readers << group.allowed_groups_readers
-      # end
+      allowed_readers += self.groups #группы, в которые входит пользователь
+      self.groups.each{|group| allowed_readers += group.allowed_groups_readers} #группы, которые могут читать комментарии групп, в которые входит пользователь
       allowed_readers
     end
     

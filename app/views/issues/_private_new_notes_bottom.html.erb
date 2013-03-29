@@ -1,8 +1,7 @@
-<div id="edit-readers-groups">
+<div id="edit-readers-groups" >
 	<p><%= l :private_comments_for_groups%></p>
 	<p><% Group.all.each do |group| %>
-		<%= check_box_tag 'group_ids[]', group.id, aDefGroups.include?(group), 
-					:disabled => (bCanChangeGroups ? false : true) -%>
+		<%= check_box_tag 'group_ids[]', group.id, aDefGroups.include?(group)-%>
 		<%= label_tag 'group_ids[]', group.name %>
 		<br />
 	<% end%></p>		
